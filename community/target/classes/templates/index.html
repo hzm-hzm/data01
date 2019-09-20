@@ -1,0 +1,632 @@
+	
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hlao论坛（个人项目）</title>
+<!-- <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.12.4.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+<script th:src="@{/javascript/index_add_topic.js}"></script>
+<script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+
+<script th:inline="javascript" th:src="@{/javascript/index.js}" ></script>
+<script th:inline="javascript" th:src="@{/javascript/index_login.js}"></script>	
+<script th:inline="javascript" th:src="@{/javascript/index_topic.js}"></script>	
+
+<style>
+		 .enlargeImg_wrapper {
+		  display: none;
+		  position: fixed;
+		  z-index: 999;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  background-repeat: no-repeat;
+		  background-attachment: fixed;
+		  background-position: center;
+		  background-color: rgba(52, 52, 52, 0.8);
+		  background-size: 50%;
+		}
+		img:hover {
+		    cursor: zoom-in;
+		}
+		.enlargeImg_wrapper:hover {
+		    cursor: zoom-out;
+		}
+</style>
+
+
+</head>
+<body style="background-color: #eee;">
+
+<script th:inline="javascript">
+
+var message= [[${session.user}]];
+
+
+</script>
+	
+	
+	<div class="container" style="width: 1100px; background-color:white;">
+	
+	
+<!-- 		页头 -->
+		<div class="row" >
+			<div class="col-md-6"><h2>hlao论坛</h2><span id="clear_state"></span>	
+			<span id="online_user" th:text="${session.user}" style="display:none "></span></div>
+			
+				<div id="defalue_model" class="col-md-2 col-md-offset-4" style="padding-top: 20px; display: ">
+				<button class="btn btn-default" data-toggle="modal" data-target="#myModal" type="button">登录</button>
+				<a class="btn btn-default" href="to_regist" role="button">注册</a>
+			</div>
+			
+			<div id="online_model" class="col-md-3 col-md-offset-3" style="padding-top: 10px;display:none">	
+				<img id="online_picture" src="/image0/regist/default.jpg"
+				style="width: 50px;height: 50px;border:solid 1px;border-radius: 50%">
+				<span id="online_name" style="margin-left: 5px;font-size: 15px"></span>
+				<button type="button" class="btn btn-danger" onclick="user_exit()" style="float: right;margin-top: 8px">退出</button>
+			</div>
+			
+<!-- 					登录框 -->
+					<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title">登录界面</h4>
+					      </div>
+
+					      <div class="modal-body" style="text-align: center;">
+					       <form id="login_model" class="form-inline" >
+					       
+							  <div id="email_group" class="form-group">
+							    <label for="exampleInputEmail1">账号：</label>
+							    <input id="email" name="email"  type="email" class="form-control"  placeholder="Email">
+							  	<h5><span id="email_error" style="color: red"></span></h5>
+							  </div>
+							  
+							  <br/></br/>
+							  
+							  <div id="password_group" class="form-group">
+							    <label for="exampleInputPassword1">密码：</label>
+							    <input id="password" name="password" type="password" class="form-control"  placeholder="Password">
+							 	<h5><span id="password_error" style="color: red"></span></h5>
+							  </div>
+							  
+							  <br/><br/>
+							  
+							  <button id="login_bth" type="button" class="btn btn-default" style="margin-left: 0px" onclick="login()">登录</button>
+							  <a class="btn btn-default" href="to_regist" role="button">注册</a>
+					      	</form>
+					      </div>
+					     
+					    </div><!-- /.modal-content -->
+					  </div><!-- /.modal-dialog -->
+					</div>
+					</div>
+  				
+				
+		<div class="row">
+			<div class="col-md-12">
+				
+				
+<!-- 				图片轮播 -->
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators" style="padding-top: 200px" >
+				    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				  </ol>
+				
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				      <img  src="image0/index/img1.jpg">
+				      <div class="carousel-caption">
+				       
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img  src="image0/index/img2.jpg">
+				      <div class="carousel-caption">
+				       
+				      </div>
+				    </div>
+				    <div class="item">
+				      <img  src="image0/index/img6.jpg">
+				      <div class="carousel-caption" >
+				      
+				      </div>
+				    </div>
+				    
+				  </div>
+				
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+		</div>
+		
+
+<!-- 		查询话题 -->
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4" id="find_title_model">
+				<form name="title_form" class="navbar-form navbar-left" role="search" ;align="center" 
+				action="javascript:find_topic_bytitle(1)" >
+  					<div class="form-group">
+    					<input id=find_title name="title" type="text" class="form-control" placeholder="关键词">
+  					</div>
+  					<button type="submit" class="btn btn-default" id="find_title_bth">确定</button>
+				</form>
+			</div>
+		</div>
+		
+		
+		
+<!-- 		页中 -->
+		<div class="row" style="height: 500px;">
+<!-- 		分类栏 -->
+			<div class="col-md-10"  >
+				<nav class="navbar navbar-default" style="height: -10px">
+				  <div class="container-fluid"  >
+				    <div  class="navbar-header" style="font-size: 50px" id="sorts_model" > 
+<!-- 				      <a class="navbar-brand" href="#" style="margin-left: 20px" > -->
+<!-- 				                全部 -->     	
+<!-- 				       <a class="navbar-brand" href="#" style="margin-left: 20px"> -->
+<!-- 				        #搞笑 -->
+<!-- 				      更多 -->
+				      <ul class="nav navbar-nav" style="padding-left: 10px" >
+				       <li class="dropdown" style="font-size: 20px;">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >更多<span class="caret"></span></a>
+				          <ul class="dropdown-menu" id="sort_more" >
+				            
+				          </ul>
+				        </li>
+				        </ul>
+				      
+				    </div>
+				  </div>
+				</nav>
+			</div>
+			
+			
+			
+<!-- 		发表话题栏 -->
+			<div id="add_topic_div"  class="col-md-10 " style="height: 700px;display: none;">
+				<div class="row"style="margin-left: 5px;background-color: #eee;border-radius: 5%;height: 680px;border: solid 1px;">
+					<form style="margin-left:15px" id="add_topic_model">
+						<br/>
+						<div id="sort_group" class="form-group">
+						    <label for="exampleInputEmail1">请选择话题的分类：</label>
+							    <select id="sid" name="sid" class="form-control" style="width: 18%">
+<!-- 								  <option>#搞笑</option> -->
+<!-- 								  <option>2</option> -->
+								</select>
+						</div>
+						
+						<div id="title_group" class="form-group">
+						    <label for="exampleInputEmail1">请输入话题的标题：</label>
+						    <span id="title_error" style="color: red"></span>
+						    <input id="title" name="title"  type="email" class="form-control"  placeholder="Title" style="width: 80%">
+						 </div>
+						 
+						 <div id="content_group" class="form-group">
+						    <label for="exampleInputEmail1">请输入话题的内容：</label>
+						    <span id="content_error"  style="color: red"></span>
+						    <textarea id="content" name="content" class="form-control" rows="12" ></textarea>
+						 </div>
+						 
+						 <div id="pictures_group" class="form-group">
+						    <label for="exampleInputEmail1">您可以添加图片：</label>
+						    <div style="width: 800px">
+							    <div style="position: relative;width: 150px;height:150px;float:left">
+							    <img src="/image0/index/uploadimage.jpg" alt="选择并上传头像" id="picture1"
+							       		style="width: 140px;height: 140px;left:0;top: 0;"/>
+						       		<input  type="file" id="file1" name="file1"
+							       		accept="image/jpg,image/png,image/gif"
+							       		style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
+							    </div>
+							    
+								    <div style="position: relative;width: 150px;height:150px;float:left;margin-left: 50px">
+								    <img src="/image0/index/uploadimage.jpg" alt="选择并上传头像" id="picture2"
+								       		style="width: 140px;height: 140px;left:0;top: 0;"/>
+							       		<input  type="file" id="file2" name="file2"
+								       		accept="image/jpg,image/png,image/gif"
+								       		style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
+								    </div>
+								    
+								    <div style="position: relative;width: 150px;height:150px;float:left;margin-left: 50px">
+								    <img src="/image0/index/uploadimage.jpg" alt="选择并上传头像" id="picture3"
+								       		style="width: 140px;height: 140px;left:0;top: 0;"/>
+							       		<input  type="file" id="file3" name="file3"
+								       		accept="image/jpg,image/png,image/gif"
+								       		style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
+								    </div>
+							    
+						    </div>	
+						</div>
+						
+					 </form>
+					<button style="margin-left: 80px;height: 60px;width: 100px;margin-top: 20px" 
+					type="button" class="btn btn-primary btn-lg" onclick="save_topic()">发布</button>	
+				</div>
+				 
+			</div>
+			
+<!-- 		进入话题详情栏 -->
+			<div id="to_topic_div"  class="col-md-10 " style="overflow:hidden;display: none">
+				<div style="margin-left: 8px;border-radius: 5%;border: solid 1px;">
+			
+				<div class="row">
+					<div id="topic_content" style="text-align: center;">
+						<h1 id="to_topic_title"></h1>
+						<h1 style="display: none" id="none_topic_tid"></h1>
+					<a id="topic_delete" type="button" class="btn btn-danger" style="float: right; margin-top: -45px;margin-right: 20px;">删除</a>
+					</div>
+					<hr>
+					<img id="to_topic_user_image" style="width: 60px;height: 60px;border-radius: 50%;
+					border: solid 1px;margin-right: 20px;float: right;margin-top: -10px" />
+					<div id="to_topic_user" style="float:right;margin-right: 30px">
+<!-- 						发布者：xxxxxx,时间：xxx -->
+					</div>
+					<div id="topic_pictures" style="margin-left: 30px">
+<!-- 						<img src="/image/regist/default.jpg" style="width:150px;height: 150px;border:solid 1px;"/> -->
+<!-- 						<img src="/image/regist/default.jpg" style="width:150px;height: 150px;border:solid 1px;"/> -->
+<!-- 						<img src="/image/regist/default.jpg" style="width:150px;height: 150px;border:solid 1px;"/> -->
+					</div>
+					
+					<div id="topic_content" style="width: 850px;display:block;word-break: break-all;word-wrap: break-word;margin-left: 20px;">
+						<h3 style="letter-spacing:3px;line-height: 35px;text-indent:50px;" id="to_topic_content"></h3></div>
+						
+						<a id="bad_a"  style="float: right;margin-top:10px;margin-right: 40px;font-size: 18px">
+							<span id="bad" class="glyphicon glyphicon-thumbs-down"></span>
+						</a>
+						<a id="good_a"   style="float: right;margin-top:10px; margin-right: 25px;font-size: 18px">
+							<span id="good" class="glyphicon glyphicon-thumbs-up"></span>
+						</a>
+						
+	
+				</div>
+					<div id="to_topic_sort" style="height: 50px;color:#777;width: 200px;background-color:#FFFF66;
+					font-size: 18px;height: 30px;border: solid 1px;">
+				
+					</div>
+				<hr/>
+				
+				<h2 id="comments_slogan" style="text-align: center;">
+					
+				</h2>
+				
+<!-- 				评论栏 -->
+					<div id="topic_comments">
+<!-- 						<div id="topic_comment" style="border: solid 1px;"> -->
+<!-- 							<div class="comment_top"> -->
+<!-- 								<b style="font-size: 20px">#1楼</b> -->
+<!-- 								<img style="width: 50px;height: 50px;border-radius: 50%;margin-left: 5px" src="/image/regist/default.jpg"/>  -->
+<!-- 								132456 -->
+<!-- 								<h4 style="float: right;margin-right: 20px">sss</h4> -->
+<!-- 							</div> -->
+<!-- 							<hr/> -->
+<!-- 							<div id="topic_content" style="word-break: break-all;width: 750px;text-indent:25px;"> -->
+<!-- 								sdasfafsdasfafsdasfafsdasfafsdasfafsdasfafsdasfafsdasfaf -->
+<!-- 								sdasfafsdasfafsdasfafsdasfafsdasfafsdasfafsda -->
+<!-- 							</div> -->
+<!-- 							<a  type="button" class="btn btn-danger"  -->
+<!-- 							style="float: right; margin-top: -20px;margin-right: 20px;">删除</a> -->
+<!-- 							<br/> -->
+<!-- 						</div> -->
+<!-- 						<br/> -->
+						
+					</div>
+				
+				<div style="height: 60px"></div>
+					<div style="position:fixed;bottom: 5px;z-index: 10;left: 35%">
+						<a href="javascript:add_comment()" style="font-size: 35px;
+						width: 160px" class="btn btn-default" type="button"> 评论 </a>
+					</div>
+
+<!-- 				发表评论操作框 	 -->
+					<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="exampleModalLabel">发表评论框</h4>
+					      </div>
+					      <div class="modal-body">
+					        <form id="comment_from">
+					          <div id="comment_content_group" class="form-group">
+					            <label for="message-text" class="control-label">评论信息:</label>
+					            <span id="comment_content_error" style="color: red;font-size: 20px"></span>
+					            <textarea class="form-control" name="comment_content" id="comment_content" rows="10"></textarea>
+					          </div>
+					        </form>
+					      </div>
+					      <div class="modal-footer">	       
+					         <input type="button" class="btn btn-primary" value="发表评论" onclick="publish_comment()"/>
+					         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					</div>
+					
+			</div>
+					
+<!-- 		话题栏 -->
+			<div id="topics_div"   class="col-md-10"   style="display:">
+				
+				<table class="table table-hover" >
+				  <tr style="text-align: center;">
+				  	<th width="3%">#</th>
+				  	<th width="57%">标题</th>
+				  	<th width="15%">发布者</th>
+				  	<th width="10%">点赞量</th>
+				  	<th>时间</th>
+				  </tr>
+				  
+				  <tbody id="topics_model" ></tbody>
+				 
+<!-- 				  <tr> -->
+<!-- 				  	<td>1</td> -->
+<!-- 				  	<td> -->
+<!-- 				  	<a href="#"> -->
+<!-- 				  		蔡徐坤打篮球 -->
+<!-- 				  	</a> -->
+<!-- 				  	</td> -->
+<!-- 				  	<td>我是蔡徐坤</td> -->
+<!-- 				  	<td><span class="glyphicon glyphicon-heart" style="color: red"></span>254</td> -->
+<!-- 				  	<td>2019-07-09 12:40:23</td> -->
+<!-- 				  </tr> -->
+
+				</table>
+				
+<!-- 				提示无有记录栏 -->
+				<div id="show_empty_message" style="margin-left: 30px;display: none">
+					<div style="float: left;">
+						<img  src="/image0/index/cat.jpg"/>
+					</div>
+					<div style="float: left;margin-left: 20px;margin-top: 40px">
+						<h1>空空如也~</h1>
+						<h1>需要您来增添一份色彩。</h1>
+						<a href="javascript:to_page_byuid(1,1)" type="button" class="btn btn-success">发表话题</a>
+						<a href="javascript:to_page(1)" type="button" class="btn btn-info">发表评论</a>
+					</div>
+				</div>
+				
+			</div>
+			
+<!-- 		我的操作栏 -->
+			<div  class="col-md-2" style="margin-top: -70px">
+			
+			<div style="height: 80px;">
+					<nav id="nowtime" style="height: 50px;font-size: 35px;text-align: center;	" 
+					class="navbar navbar-default">
+						
+					</nav>
+			</div>
+			
+				<nav class="navbar navbar-default" style="background-color: #FFF0AC	">
+				  <div class="container-fluid">
+				    <div class="navbar-header" style="font-size: 20px">
+					   <p class="navbar-text" style="text-align: center" >关于我的</p>
+				    </div>
+				  </div>
+				</nav>
+				
+				<div class="list-group" style="margin-top: -20px;font-size: 18px" >
+				  <a href="javascript:to_page_byuid(1,1)" class="list-group-item " >
+				    <span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;我的话题
+				  </a>
+				  <a href="javascript:to_page_byuidcomment(1)" class="list-group-item">
+				  	<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;我的评论
+				  </a>
+				  <a href="javascript:add_topic()" class="list-group-item">
+					<span class="glyphicon glyphicon-camera"></span>&nbsp;&nbsp;发表话题</a>
+				  <a href="javascript:open_my_message()" class="list-group-item">
+				  	<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的信息</a>
+				</div>
+							
+			<div style="height: 160px;background-color:#C7C7E2;border-radius: 8% ">
+					<nav id="web_message_nav" style="height: 205px;font-size: 18px; width:130px;
+					margin-left:auto;margin-right:auto;color: white;line-height: 30px" >
+						
+					</nav>
+			</div>
+			
+			</div>
+		</div>
+		
+<!-- 		我的信息框 -->
+		<div class="modal fade" id="myMessageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">我的个人信息</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+		        <div style="width: 500px;margin-left: auto;margin-right: auto;">
+		        	<div style="text-align: center;">
+		        		 <img id="show_my_picture" src="/image/regist/default.jpg" style="width: 100px; height: 100px;
+		        border-radius: 50%; border: solid 1px;"/>
+			       		<div style="position: absolute; top: 30px;left: 420px">
+			       			<div id="my_all_topics"></div>
+			       			<br>
+			       			<div id="my_all_comments">总评论数：</div>
+			       		</div>
+		        	</div>
+		        	
+		        	<table class="table table-striped" style="font-size: 18px;margin-top: 10px">
+					  	<tr>
+					  		<td style="width: 18%">账号：</td>
+					  		<td id="emailTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>昵称：</td>
+					  		<td id="nicknameTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>姓名：</td>
+					  		<td id="usernameTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>性别：</td>
+					  		<td id="sexTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>电话：</td>
+					  		<td id="phoneTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>年龄：</td>
+					  		<td id="ageTd"></td>
+					  	</tr>
+					  	<tr>
+					  		<td>国家：</td>
+					  		<td id="addressTd"></td>
+					  	</tr>
+					</table>
+		        </div>
+		       
+		        
+		      </div>
+		      <div class="modal-footer">
+		      <a href="javascript:to_page_byuid(1,1)" style="float: left; margin-left: 30px" type="button" class="btn btn-info">我的话题</a>
+		      <a href="javascript:to_page_byuidcomment(1)" style="float: left;" type="button" class="btn btn-success" >我的评论</a>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+<!-- 		        <button type="button" class="btn btn-primary">Save changes</button> -->
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+<!-- 		分页栏 -->
+		<div id="pages_div" style="display:" class="col-md-5 col-md-offset-3" >
+			<nav aria-label="Page navigation">
+			  <ul class="pagination " id="page_model">
+			  
+<!-- 			  	<li><a href="#">首页</a></li> -->
+<!-- 			    <li> -->
+<!-- 			      <a href="#" aria-label="Previous"> -->
+<!-- 			        <span aria-hidden="true">&laquo;</span> -->
+<!-- 			      </a> -->
+<!-- 			    </li> -->
+<!-- 			    <li><a href="#">1</a></li> -->
+<!-- 			    <li><a href="#">2</a></li> -->
+<!-- 			    <li> -->
+<!-- 			      <a href="#" aria-label="Next"> -->
+<!-- 			        <span aria-hidden="true">&raquo;</span> -->
+<!-- 			      </a> -->
+<!-- 			    </li> -->
+<!-- 			    <li><a href="#">尾页</a></li> -->
+			    
+			  </ul>
+			</nav>
+		</div>
+		
+<!-- 		尾页 -->
+		<div class="col-md-12" style="margin-top: 15px">
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title">
+			        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          	联系方式
+			        </a>
+			      </h4>
+			    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       	<span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;0757-25515461
+       	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       	<span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;18062548850
+       	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(联系时间：周一到周五9：00-5：30)
+       	<br/><br/>
+       	<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;
+       	广东省广州市天河区黄埔大道东路四巷3号
+       	
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+         	关于网站
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        	这网页纯属是本人个人的学习案例，没有盈利目的，谢谢。<br>
+        	------------------------------------------------------------------------------------
+      </div>
+    </div>
+  </div>
+ </div>
+ 		</div>
+ 		
+ <script type="text/javascript">
+
+$("#file1").change(function () {
+    // 获取上传文件对象
+    var file = $(this)[0].files[0];
+    // 读取文件URL
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    // 阅读文件完成后触发的事件
+    reader.onload = function () {
+        // 读取的URL结果：this.result
+        $("#picture1").attr("src", this.result);
+    }
+});
+
+$("#file2").change(function () {
+    // 获取上传文件对象
+    var file = $(this)[0].files[0];
+    // 读取文件URL
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    // 阅读文件完成后触发的事件
+    reader.onload = function () {
+        // 读取的URL结果：this.result
+        $("#picture2").attr("src", this.result);
+    }
+});
+
+$("#file3").change(function () {
+    // 获取上传文件对象
+    var file = $(this)[0].files[0];
+    // 读取文件URL
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    // 阅读文件完成后触发的事件
+    reader.onload = function () {
+        // 读取的URL结果：this.result
+        $("#picture3").attr("src", this.result);
+    }
+});
+
+
+</script>
+	
+</body>
+</html>

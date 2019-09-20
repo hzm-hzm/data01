@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+<!--   <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	
+	<!--取消注析 -->
+  	<commentGenerator>
+  		<property name ="suppressAllComments" value ="true"/>
+	</commentGenerator>
+	
+  	<!-- jdbcConection：指定如何连接目标数据库 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/community?characterEncoding=utf-8"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+
+	<!-- javaTypeResolver 类型装换器  -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!--javaModeGenerator：指定javaBean的生成策略
+	targetProject="test.model"目标包名
+	targetProject="\MBGTestProject\src"：目标工程
+	 -->
+    <javaModelGenerator targetPackage="xin.hlao.bean" 
+    		targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!--sqlMapGenerator：sql映射生成策略  -->
+    <sqlMapGenerator targetPackage="xin.hlao.dao"  
+    		targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- javaClientGenerator：指定mapper接口的所在的位置  -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="xin.hlao.dao" 
+    		targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+	<!-- 指定要逆向分析哪些表,根据表要创建javaBean 
+			domainObject：指定要生成的Bean的名字
+	-->
+   	<table tableName="user" domainObjectName="User"></table>
+   	<table tableName="image" domainObjectName="Image"></table>
+   	<table tableName="sort" domainObjectName="Sort"></table>
+   	<table tableName="topic" domainObjectName="Topic"></table>
+   	<table tableName="comment" domainObjectName="Comment"></table>
+<!-- 	 	   enableCountByExample="false" -->
+<!--            enableUpdateByExample="false" -->
+<!--            enableDeleteByExample="false" -->
+<!--            enableSelectByExample="false" -->
+<!--            selectByExampleQueryId="false"  -->
+  </context>
+</generatorConfiguration>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hlao论坛注册页面（个人项目）</title>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.12.4.min.js"></script>
+<!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.0.0.min.js"></script> -->
+
+<link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="javascript/regist.js"></script>
+</head>
+<body style="background-color: #eee;">
+<script type="text/javascript">
+
+	
+</script>
+
+
+<!-- 		背景 -->
+ 		<div class="jumbotron" style="background: url('image0/regist/regist_backgroud.jpg');
+ 				background-size: cover; height: 750px ;width: 1100px;margin-left: auto;margin-right: auto;">
+		
+			<div class="container">
+			  
+			  <div class="row" style="margin-top: -40px">
+			  	<h2 style="color: white;">hlao论坛欢迎您的注册</h2>
+				<p><a class="btn btn-primary btn-lg" href="/to_index" role="button">返回首页</a></p>
+			  </div>
+			  <div id="msg_model" style="display:none">
+			  	<h1 style="color: white;margin-left: 200px">已经注册成功！</h1>
+			  	<h2 style="color: white;margin-left: 200px">&nbsp;&nbsp;&nbsp;&nbsp;请到
+			  	<e style="color:red">邮箱</e>进行激活才能登录！</h2>
+			  </div>
+			  
+			  
+			  <div id="regist_model" class="row" style="display:">
+			  	 <div class="col-md-10 col-md-offset-2" style="background-color: white;margin-top: -30px;height: 600px;opacity: 1;border: solid 1px;">
+			  	 
+			  	 
+<!-- 			  	 注册表单 -->
+<!-- 			  	<form class="form-horizontal" id="add_picture_model" enctype="multipart/form-data"> -->
+					 <form class="form-horizontal" id="add_user_model" >
+<!-- 			  	 头像 -->
+			  	 <div class="form-group">
+			  	 	 <div style="position: relative;border: 5px solid lightblue;width: 150px;height:150px;margin: 5px auto;border-radius: 50%;">
+				       	<img src="/image0/regist/default.jpg" alt="选择并上传头像" id="picture_"
+					       style="width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;"/>
+				       	<input  type="file" id="file" name="file"
+					       accept="image/jpg,image/png,image/gif"
+					       style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
+			         	</div>
+					</div>			
+					  	 
+					 
+			  	 
+			  	 
+<!-- 			  	 账号 -->
+				  <div id="email_group" class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">用户账号</label>
+				    <div class="col-sm-8">
+				      <input name="email" type="email" class="form-control" id="email" placeholder="Email" />
+				    </div>
+				    <h5><span id="email_error" style="color: red"></span></h5>
+				   </div>
+				   
+<!-- 				   密码 -->
+				   <div id="password1_group" class="form-group ">
+					    <label for="inputPassword3" class="col-sm-2 control-label">用户密码</label>
+					    <div class="col-sm-8">
+					      <input  id="password1" name="password1" type="password" class="form-control"  placeholder="Password">
+<!-- 					   	<span class="password1_error" aria-hidden="true"></span> -->
+					    </div>
+					    <h5><span id="password1_error" style="color: red"></span></h5>
+					  </div>
+					  
+<!-- 					 确认密码 -->
+					   <div id="password_group" class="form-group">
+					    <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+					    <div class="col-sm-8">
+					      <input name="password" id="password" type="password" class="form-control"  placeholder="Password">
+					    </div>
+					    <h5><span id="password_error" style="color: red"></span></h5>
+					  </div>
+					  
+<!-- 					  账号名称 -->
+					  <div id="nickname_group" class="form-group">
+					    <label for="exampleInputName2" class="col-sm-2 control-label">账号名称</label>
+					     <div class="col-sm-8">
+					    	<input name="nickname" id="nickname" type="text" class="form-control"  placeholder="Jane Doe">
+					     </div>
+					     <h5><span id="nickname_error" style="color: red"></span></h5>
+					  </div>
+					  
+<!-- 					  用户名称 -->
+					  <div id="username_group" class="form-group">
+					    <label for="exampleInputName2" class="col-sm-2 control-label">用户姓名</label>
+					     <div class="col-sm-8">
+					    	<input name="username" id="username" type="text" class="form-control"  placeholder="Jane Doe">
+					     </div>
+					     <h5><span id="username_error" style="color: red"></span></h5>
+					  </div>
+					  
+					   <div id="phone_group" class="form-group" >
+<!-- 					  用户电话 -->
+					    <label for="exampleInputName2" class="col-sm-2 control-label">用户电话</label>
+					     <div class="col-sm-8  ">
+					    	<input name="phone" id="phone" type="text" class="form-control"  placeholder="Phone">
+					     </div>
+					     <h5><span id="phone_error" style="color: red"></span></h5>
+					    </div>
+					  
+					 
+					 
+
+					<div class="form-group">
+					<!-- 					    用户性别 -->
+						<label for="exampleInputName2" class="col-sm-2 control-label">用户性别</label>
+						    <div class="col-sm-2">
+						   	<select name="sex" class="form-control" >
+							  <option value="1">男</option>
+							  <option value="2">女</option>	
+							</select>
+					   		</div>
+					   		
+					 <!-- 				用户年龄 -->
+						  <label for="exampleInputName2" class="col-sm-1 control-label">年龄</label>
+						   <div class="col-sm-2" >
+						   	<select id="age"  name="age" class="form-control">
+	<!-- 						  <option>1</option> -->
+							</select>
+						   </div>
+					   
+					   					   
+					<!-- 				用户地址 -->
+						  <label for="exampleInputName2" class="col-sm-1 control-label">地址</label>
+						    <div class="col-sm-2">
+						   	<select name="address" class="form-control">
+							  <option value="中国">中国</option>
+							  <option value="外国">外国</option>
+							</select>
+						   </div>
+
+					  </div>
+
+
+					  
+							<button id="save_user_bth" type="button" 
+			  	 	class="btn btn-primary" style="margin-left: 350px" onclick="save_user()">注册</button>
+				   </form>
+			  	 	
+
+			
+		
+ 		</div>
+ 		</div>
+ 		</div>
+	
+	<script>
+	//显示提示信息
+// 	function show_msg(result){
+// 		$("#regist_model").css("display","none");
+// 		alert("hahaha	")
+// 		conlose.log(result);
+// 	}
+	
+	
+    // 头像预览
+    $("#file").change(function () {
+        // 获取上传文件对象
+        var file = $(this)[0].files[0];
+        // 读取文件URL
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        // 阅读文件完成后触发的事件
+        reader.onload = function () {
+            // 读取的URL结果：this.result
+            $("#picture_").attr("src", this.result);
+        }
+    });
+</script>
+
+	
+	
+	
+</body>
+</html>
