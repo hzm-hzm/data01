@@ -1,0 +1,4 @@
+url£ºjdbc:mysql://localhost:3306/liuhua?characterEncoding-utf-8
+driver: com.mysql.jdbc.Driver
+username: root
+password: root
